@@ -2,6 +2,9 @@
 # Discord用BotのPythonライブラリ
 discord.py==2.3.2
 
+# 他のライブラリ
+requests==2.31.0
+
 # コード成型用ライブラリ
 # ruff==0.4.6
 
