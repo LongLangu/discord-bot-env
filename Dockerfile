@@ -18,6 +18,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # pipをアップグレードし、依存関係をインストール
 RUN pip install --upgrade pip setuptools wheel 
 
+COPY PyNaCl-remove-check.patch PyNaCl-remove-check.patch
 # pynaclのソースコードをダウンロードし、パッチを適用
 RUN wget -qO pynacl.tar.gz https://github.com/pyca/pynacl/archive/1.5.0.tar.gz && \
     mkdir pynacl && tar --strip-components=1 -xvf pynacl.tar.gz -C pynacl && rm pynacl.tar.gz && \
