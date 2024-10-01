@@ -1,5 +1,5 @@
 # ビルドステージ
-FROM --platform=linux/arm/v7 arm32v7/python:3.8.19-slim-bullseye as builder
+FROM --platform=linux/arm/v7 arm32v7/python:3.12-slim-bullseye as builder
 
 # 作業ディレクトリの設定
 WORKDIR /build
@@ -16,7 +16,7 @@ RUN pip install --upgrade pip setuptools wheel && \
     pip wheel --no-cache-dir --wheel-dir=/root/wheels -r requirements.txt
 
 # 実行ステージ
-FROM --platform=linux/arm/v7 arm32v7/python:3.8.19-slim-bullseye
+FROM --platform=linux/arm/v7 arm32v7/python:3.12-slim-bullseye
 
 # 作業ディレクトリの設定
 WORKDIR /app
