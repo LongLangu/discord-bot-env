@@ -15,8 +15,6 @@ RUN apt-get update && \
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
-RUN echo $PATH
-
 # pipをアップグレードし、依存関係をインストール
 RUN pip install --upgrade pip setuptools wheel && \
     pip wheel --no-cache-dir --wheel-dir=/root/wheels -r requirements.txt
@@ -43,6 +41,6 @@ COPY --from=builder /root/wheels /root/wheels
 COPY --from=builder /build/requirements.txt .
 
 # 事前にビルドされたホイールから依存関係をインストール
-RUN pip install --no-cache /root/wheels/*
+RUN SODIUM_INSTALL=system pip install --no-cache /root/wheels/*
 
 CMD ["python3"]
