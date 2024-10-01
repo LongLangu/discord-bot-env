@@ -8,14 +8,11 @@ COPY requirements.txt /build/
 
 # 必要なパッケージのインストール
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends wget curl gcc build-essential libpq-dev libffi-dev && \
+    apt-get install -y --no-install-recommends wget git curl gcc build-essential libpq-dev libffi-dev && \
     rm -rf /var/lib/apt/lists/*
 
-# 一時ディレクトリの作成と権限設定
-RUN mkdir -p /root/.rustup/tmp && chmod 777 /root/.rustup/tmp
-
 # RustとCargoのインストール
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # pipをアップグレードし、依存関係をインストール
