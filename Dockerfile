@@ -11,6 +11,10 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends gcc build-essential libpq-dev libffi-dev && \
     rm -rf /var/lib/apt/lists/*
 
+# RustとCargoのインストール
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && \
+    export PATH="$HOME/.cargo/bin:$PATH"
+
 # pipをアップグレードし、依存関係をインストール
 RUN pip install --upgrade pip setuptools wheel && \
     pip wheel --no-cache-dir --wheel-dir=/root/wheels -r requirements.txt
