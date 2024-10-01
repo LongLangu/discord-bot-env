@@ -5,8 +5,8 @@ discord.py==2.4.0
 # 他のライブラリ
 requests==2.32.3
 psycopg2==2.9.9
-PyGithub==2.4.0
-google-generativeai==0.8.2
+# PyGithub==2.4.0
+# google-generativeai==0.8.2
 
 # コード成型用ライブラリ
 # ruff==0.4.6
