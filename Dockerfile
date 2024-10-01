@@ -8,7 +8,7 @@ COPY requirements.txt /build/
 
 # 必要なパッケージのインストール
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends gcc build-essential libpq-dev libffi-dev && \
+    apt-get install -y --no-install-recommends curl gcc build-essential libpq-dev libffi-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # RustとCargoのインストール
