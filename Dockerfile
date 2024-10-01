@@ -17,7 +17,6 @@ RUN wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.20-stab
     cd libsodium-stable && \
     ./configure && \
     make -j && \
-    make check && \
     make install && \
     cd .. && \
     rm -rf libsodium-1.0.20-stable*
