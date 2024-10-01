@@ -13,7 +13,9 @@ RUN apt-get update && \
 
 # RustとCargoのインストール
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH $PATH:"$HOME/.cargo/bin"
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+RUN echo $PATH
 
 # pipをアップグレードし、依存関係をインストール
 RUN pip install --upgrade pip setuptools wheel && \
