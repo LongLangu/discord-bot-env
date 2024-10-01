@@ -19,6 +19,15 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN pip install --upgrade pip setuptools wheel && \
     pip wheel --no-cache-dir --wheel-dir=/root/wheels -r requirements.txt
 
+# pynaclのソースコードをダウンロードし、パッチを適用
+RUN wget -qO pynacl.tar.gz https://github.com/pyca/pynacl/archive/1.5.0.tar.gz && \
+    mkdir pynacl && tar --strip-components=1 -xvf pynacl.tar.gz -C pynacl && rm pynacl.tar.gz && \
+    cd pynacl && \
+    git apply ../PyNaCl-remove-check.patch && \
+    python3 setup.py bdist_wheel && \
+    cp -f dist/PyNaCl-1.5.0-py3-none-any.whl /root/wheels/ && \
+    cd .. && rm -rf pynacl
+
 # 実行ステージ
 FROM --platform=linux/arm/v7 arm32v7/python:3.12-slim-bullseye
 
@@ -41,6 +50,6 @@ COPY --from=builder /root/wheels /root/wheels
 COPY --from=builder /build/requirements.txt .
 
 # 事前にビルドされたホイールから依存関係をインストール
-RUN SODIUM_INSTALL=system pip install --no-cache /root/wheels/*
+RUN pip install --no-cache /root/wheels/*
 
 CMD ["python3"]
