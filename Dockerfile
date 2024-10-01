@@ -16,8 +16,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # pipをアップグレードし、依存関係をインストール
-RUN pip install --upgrade pip setuptools wheel && \
-    pip wheel --no-cache-dir --wheel-dir=/root/wheels -r requirements.txt
+RUN pip install --upgrade pip setuptools wheel 
 
 # pynaclのソースコードをダウンロードし、パッチを適用
 RUN wget -qO pynacl.tar.gz https://github.com/pyca/pynacl/archive/1.5.0.tar.gz && \
@@ -26,7 +25,8 @@ RUN wget -qO pynacl.tar.gz https://github.com/pyca/pynacl/archive/1.5.0.tar.gz &
     git apply ../PyNaCl-remove-check.patch && \
     python3 setup.py bdist_wheel && \
     cp -f dist/PyNaCl-1.5.0-py3-none-any.whl /root/wheels/ && \
-    cd .. && rm -rf pynacl
+    cd .. && rm -rf pynacl && \
+    pip wheel --no-cache-dir --wheel-dir=/root/wheels -r requirements.txt
 
 # 実行ステージ
 FROM --platform=linux/arm/v7 arm32v7/python:3.12-slim-bullseye
