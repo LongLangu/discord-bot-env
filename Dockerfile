@@ -44,8 +44,8 @@ COPY --from=builder /build/requirements.txt .
 RUN pip install --no-cache /root/wheels/*
 
 # startスクリプトを作成
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 
 # ENTRYPOINTの設定
-ENTRYPOINT ["start.sh"]
+ENTRYPOINT ["/start.sh"]

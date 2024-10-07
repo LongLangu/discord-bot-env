@@ -2,6 +2,7 @@
 
 while true; do
     # main.pyが存在するか確認
+    cd /app/
     if [ -f "main.py" ]; then
         # 存在する場合、コマンドを実行
         python main.py -e production
