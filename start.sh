@@ -5,6 +5,7 @@ while true; do
     cd /app/
     if [ -f "main.py" ]; then
         # 存在する場合、コマンドを実行
+        echo "main.pyが見つかりました。コマンドを実行します..."
         python main.py -e production
         break  # コマンド実行後、ループを終了
     else
