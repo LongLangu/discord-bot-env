@@ -43,4 +43,9 @@ COPY --from=builder /build/requirements.txt .
 # 事前にビルドされたホイールから依存関係をインストール
 RUN pip install --no-cache /root/wheels/*
 
-CMD ["python3"]
+# startスクリプトを作成
+COPY start.sh /app/start.sh
+RUN chmod +x /app/start.sh
+
+# ENTRYPOINTの設定
+ENTRYPOINT ["start.sh"]
