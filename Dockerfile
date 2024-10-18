@@ -27,7 +27,7 @@ WORKDIR /app
 
 # ロケールの設定
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends locales && \
+    apt-get install -y --no-install-recommends locales libpq-dev && \
     localedef -f UTF-8 -i ja_JP ja_JP.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
 
